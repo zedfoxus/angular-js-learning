@@ -13,9 +13,24 @@
 		<div class="row">
 			<h1>Temperature conversion</h1>
 		</div>
-		<div ng-app="">
+		<div data-ng-app="">
 
-			<p>Temperature in C: <input type="text" ng-model="temperature"></p>
+			<h1>Temperature</h1>
+			<div>
+				<span id="randomTemperature"></span>
+				<span id="randomUnit"></span>
+			</div>
+
+			<h1>Your Answer in <span id="unit"></span></h1>
+			<div>
+				<label>
+					<input type="text" ng-model="temperature">
+				</label>
+				<button type="button">Submit</button>
+			</div>
+
+			<p>Temperature in </p>
+
 
 		</div>
 	</div>
