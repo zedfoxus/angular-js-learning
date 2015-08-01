@@ -24,7 +24,10 @@ app.controller(
 	[
 		'$scope',
 		function($scope) {
-
+			$scope.randomUnit = function() {
+				var i = Math.random() * 100 + 1;
+				return i < 50 ? 'C' : 'F';
+			}
 		}
 	]
 );
