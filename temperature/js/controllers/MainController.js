@@ -21,13 +21,31 @@ Regardless, we should show the simple conversion math and the real conversion ma
 
 app.controller(
 	'MainController',
-	[
-		'$scope',
-		function($scope) {
-			$scope.randomUnit = function() {
-				var i = Math.random() * 100 + 1;
-				return i < 50 ? 'C' : 'F';
+	function($scope) {
+
+		$scope.randomUnit = function() {
+			console.log("coming here...");
+			var i = Math.random() * 100 + 1;
+			if (i < 50) {
+				$scope.inverseRandomUnit = 'F';
+				return 'C';
 			}
+			else {
+				$scope.inverseRandomUnit = 'C';
+				return 'F';
+			}
+		};
+
+		$scope.randomTemperature = function() {
+			return getRandomTemperature(-300, 300);
 		}
-	]
+
+		$scope.checkAnswer = function() {
+			alert($scope.answer);
+		}
+	}
 );
+
+function getRandomTemperature(min, max) {
+	return Math.floor(Math.random() + (max-min+1) + min)
+}

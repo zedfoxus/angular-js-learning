@@ -5,34 +5,33 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<script src="js/shared/ui-bootstrap-tpls-0.13.1.min.js"></script>
 	<script src="js/shared/angular.min.js"></script>
+	<script src="js/shared/ui-bootstrap-tpls-0.13.1.min.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<h1>Temperature conversion</h1>
 		</div>
-		<div data-ng-app="">
+		<div data-ng-app="myApp" data-ng-controller="MainController">
 
-			<h1>Temperature</h1>
 			<div>
-				<span id="randomTemperature"></span>
-				<span id="randomUnit"></span>
+				<span id="randomTemperature"> {{ randomTemperature() }}</span>
+				<span id="randomUnit">{{ randomUnit() }}</span>
+				is
+				<input type="text" ng-model="temperature" data-ng-bind="answer">
+				<span id="randomUnit">{{ inverseRandomUnit }}</span>
+				<button type="button" data-ng-click="checkAnswer()">Submit</button>
 			</div>
-
-			<h1>Your Answer in <span id="unit"></span></h1>
-			<div>
-				<label>
-					<input type="text" ng-model="temperature">
-				</label>
-				<button type="button">Submit</button>
-			</div>
-
-			<p>Temperature in </p>
-
 
 		</div>
 	</div>
+
+	<!-- Modules -->
+	<script src="js/app.js"></script>
+
+	<!-- Controllers -->
+	<script src="js/controllers/MainController.js"></script>
+
 </body>
 </html>
