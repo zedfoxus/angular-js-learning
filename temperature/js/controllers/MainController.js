@@ -19,32 +19,39 @@ Regardless, we should show the simple conversion math and the real conversion ma
 
  */
 
-app.controller('MainController', ['$scope', function($scope) {
+var randomTemperature = getRandomTemperature(-300, 300);
+var randomUnit = getRandomUnit();
+var inverseRandomUnit = getInverseRandomUnit();
 
-	$scope.randomUnit = function() {
-		console.log("coming here...");
-		var i = Math.random() * 100 + 1;
-		if (i < 50) {
-			$scope.inverseRandomUnit = 'F';
-			return 'C';
+function getRandomTemperature(min, max) {
+	return Math.floor(Math.random() * (max-min+1) + min)
+}
+
+function getRandomUnit() {
+	console.log("coming here...");
+	var i = Math.random() * 100 + 1;
+	return i < 50 ? 'C' : 'F';
+}
+
+function getInverseRandomUnit() {
+	return randomUnit === 'C' ? 'F' : 'C';
+}
+app.controller('MainController', ['$scope', function($scope) {
+	console.log ('in controller');
+	$scope.randomUnit = randomUnit;
+	$scope.randomTemperature = randomTemperature;
+	$scope.answer = '';
+	$scope.inverseRandomUnit = inverseRandomUnit;
+	$scope.alert = '';
+	$scope.checkAnswer = function() {
+		var answer;
+		if ($scope.randomUnit === 'F') {
+			answer = ($scope.randomTemperature - 32) * 5/9;
 		}
 		else {
-			$scope.inverseRandomUnit = 'C';
-			return 'F';
+			answer = $scope.randomTemperature * 9/5 + 32;
 		}
-	};
-
-	$scope.randomTemperature = function() {
-		return getRandomTemperature(-300, 300);
-	};
-
-	$scope.answer = '';
-
-	$scope.checkAnswer = function() {
-		alert($scope.answer);
+		$scope.alert = 'Your answer should be ' + answer.toFixed(2) + $scope.inverseRandomUnit;
 	}
 }]);
 
-function getRandomTemperature(min, max) {
-	return Math.floor(Math.random() + (max-min+1) + min)
-}

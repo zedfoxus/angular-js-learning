@@ -14,13 +14,14 @@
 		<div data-ng-app="myApp" data-ng-controller="MainController">
 
 			<div>
-				<span id="randomTemperature">{{ ::randomTemperature() }}</span>
-				<span id="randomUnit">{{ ::randomUnit() }}</span>
+				<span id="randomTemperature" data-ng-bind="randomTemperature"></span>
+				<span id="randomUnit" data-ng-bind="randomUnit"></span>
 				is
 				<input type="text" data-ng-model="answer">
-				<span>{{ ::inverseRandomUnit }}</span>
+				<span data-ng-bind="inverseRandomUnit"></span>
 				<button type="button" data-ng-click="checkAnswer()">Submit</button>
-				<span>{{ answer }}</span>
+				<span data-ng-bind="answer"></span>
+				<div data-ng-bind="alert"></div>
 			</div>
 
 		</div>
