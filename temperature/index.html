@@ -5,8 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<script src="js/shared/angular.min.js"></script>
-	<script src="js/shared/ui-bootstrap-tpls-0.13.1.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -16,22 +14,23 @@
 		<div data-ng-app="myApp" data-ng-controller="MainController">
 
 			<div>
-				<span id="randomTemperature"> {{ randomTemperature() }}</span>
-				<span id="randomUnit">{{ randomUnit() }}</span>
+				<span id="randomTemperature">{{ ::randomTemperature() }}</span>
+				<span id="randomUnit">{{ ::randomUnit() }}</span>
 				is
-				<input type="text" ng-model="temperature" data-ng-bind="answer">
-				<span id="randomUnit">{{ inverseRandomUnit }}</span>
+				<input type="text" data-ng-model="answer">
+				<span>{{ ::inverseRandomUnit }}</span>
 				<button type="button" data-ng-click="checkAnswer()">Submit</button>
+				<span>{{ answer }}</span>
 			</div>
 
 		</div>
 	</div>
 
+	<script src="js/shared/angular.min.js"></script>
+	<script src="js/shared/ui-bootstrap-tpls-0.13.1.min.js"></script>
 	<!-- Modules -->
 	<script src="js/app.js"></script>
-
 	<!-- Controllers -->
 	<script src="js/controllers/MainController.js"></script>
-
 </body>
 </html>

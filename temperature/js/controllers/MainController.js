@@ -38,7 +38,9 @@ app.controller(
 
 		$scope.randomTemperature = function() {
 			return getRandomTemperature(-300, 300);
-		}
+		};
+
+		$scope.answer = '';
 
 		$scope.checkAnswer = function() {
 			alert($scope.answer);
