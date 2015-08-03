@@ -12,18 +12,19 @@
 			<h1>Temperature conversion</h1>
 		</div>
 		<div data-ng-app="myApp" data-ng-controller="MainController">
-
-			<div>
-				<span id="randomTemperature" data-ng-bind="randomTemperature"></span>
-				<span id="randomUnit" data-ng-bind="randomUnit"></span>
-				is
-				<input type="text" data-ng-model="answer">
-				<span data-ng-bind="inverseRandomUnit"></span>
-				<button type="button" data-ng-click="checkAnswer()">Submit</button>
-				<span data-ng-bind="answer"></span>
-				<div data-ng-bind="alert"></div>
-			</div>
-
+			<form name="temperatureForm" method="post">
+				<div>
+					<span id="randomTemperature" data-ng-bind="randomTemperature"></span>
+					<span id="randomUnit" data-ng-bind="randomUnit"></span>
+					is
+					<input type="text" data-ng-model="answer">
+					<span data-ng-bind="inverseRandomUnit"></span>
+					<button type="button" data-ng-click="checkAnswer()">Submit</button>
+					<button type="button" data-ng-click="reset()">Reset</button>
+					<span data-ng-bind="result"></span>
+					<div ng-bind-html="alert"></div>
+				</div>
+			</form>
 		</div>
 	</div>
 
