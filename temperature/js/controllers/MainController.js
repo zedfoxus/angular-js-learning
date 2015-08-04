@@ -19,16 +19,33 @@ Regardless, we should show the simple conversion math and the real conversion ma
 
  */
 
-var randomTemperature = getRandomTemperature(-300, 300);
-var randomUnit = getRandomUnit();
-var inverseRandomUnit = getInverseRandomUnit();
+var TEMPERATURE_DEVIATION_TOLERANCE_FAHRENHEIT = 5;
+var TEMPERATURE_DEVIATION_TOLERANCE_CELSIUS = 2;
+
+var randomTemperature = 0;
+var randomUnit = 'F';
+var inverseRandomUnit = 'C';
+var defaultForm = {};
+
+function setDefaults() {
+	randomTemperature = getRandomTemperature(-300, 300);
+	randomUnit = getRandomUnit();
+	inverseRandomUnit = getInverseRandomUnit();
+	defaultForm = {
+		randomUnit: randomUnit,
+		randomTemperature: randomTemperature,
+		inverseRandomUnit: inverseRandomUnit,
+		answer: "",
+		result: "",
+		alert: ""
+	};
+}
 
 function getRandomTemperature(min, max) {
 	return Math.floor(Math.random() * (max-min+1) + min)
 }
 
 function getRandomUnit() {
-	console.log("coming here...");
 	var i = Math.random() * 100 + 1;
 	return i < 50 ? 'C' : 'F';
 }
@@ -37,47 +54,45 @@ function getInverseRandomUnit() {
 	return randomUnit === 'C' ? 'F' : 'C';
 }
 
-var TEMPERATURE_DEVIATION_TOLERANCE_FAHRENHEIT = 5;
-var TEMPERATURE_DEVIATION_TOLERANCE_CELCIUS = 2;
+
+setDefaults();
 
 app.controller('MainController', ['$scope', '$sce', function($scope, $sce) {
 	console.log ('in controller');
-	$scope.randomUnit = randomUnit;
-	$scope.randomTemperature = randomTemperature;
-	$scope.answer = '';
-	$scope.result = '';
-	$scope.inverseRandomUnit = inverseRandomUnit;
-	$scope.alert = '';
+	$scope.temperature = defaultForm;
+
 	$scope.checkAnswer = function() {
 
 		var correctAnswer;
 		var simpleAnswer;
-		$scope.result = 'Incorrect';
+		$scope.temperature.result = 'Incorrect';
 
-		if ($scope.randomUnit === 'F') {
-			correctAnswer = ($scope.randomTemperature - 32) * 5/9;
-			simpleAnswer = ($scope.randomTemperature - 30) / 2;
-			if (Math.abs($scope.answer - simpleAnswer) <= TEMPERATURE_DEVIATION_TOLERANCE_FAHRENHEIT) {
-				$scope.result = 'Correct';
+		if ($scope.temperature.randomUnit === 'F') {
+			correctAnswer = ($scope.temperature.randomTemperature - 32) * 5/9;
+			simpleAnswer = ($scope.temperature.randomTemperature - 30) / 2;
+			if (Math.abs($scope.temperature.answer - simpleAnswer) <= TEMPERATURE_DEVIATION_TOLERANCE_FAHRENHEIT) {
+				$scope.temperature.result = 'Correct';
 			}
 		}
 		else {
-			correctAnswer = $scope.randomTemperature * 9/5 + 32;
-			simpleAnswer = $scope.randomTemperature * 2 + 30;
-			if (Math.abs($scope.answer - simpleAnswer) <= TEMPERATURE_DEVIATION_TOLERANCE_CELCIUS) {
-				$scope.result = 'Correct';
+			correctAnswer = $scope.temperature.randomTemperature * 9/5 + 32;
+			simpleAnswer = $scope.temperature.randomTemperature * 2 + 30;
+			if (Math.abs($scope.temperature.answer - simpleAnswer) <= TEMPERATURE_DEVIATION_TOLERANCE_CELSIUS) {
+				$scope.temperature.result = 'Correct';
 			}
 		}
 
-		$scope.alert = $sce.trustAsHtml(
+		$scope.temperature.alert = $sce.trustAsHtml(
 			'Correct answer is '
-			+ correctAnswer.toFixed(2) + ' ' + $scope.inverseRandomUnit + '<br>'
+			+ correctAnswer.toFixed(2) + ' ' + $scope.temperature.inverseRandomUnit + '<br>'
 			+ 'Simple answer is '
-			+ simpleAnswer.toFixed(2) + ' ' + $scope.inverseRandomUnit
+			+ simpleAnswer.toFixed(2) + ' ' + $scope.temperature.inverseRandomUnit
 		);
-	}
-	$scope.reset = function() {
-
+	};
+	$scope.reset = function(temperature) {
+		setDefaults();
+		$scope.temperatureForm.$setPristine();
+		$scope.temperature = defaultForm;
 	}
 }]);
 
