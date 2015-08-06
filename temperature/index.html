@@ -4,7 +4,7 @@
 	<title>Temperature conversion</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
 </head>
@@ -22,8 +22,8 @@
 					<label for="answer"></label>
 					<input type="text" id="answer" data-ng-model="temperature.answer">
 					<span data-ng-bind="temperature.inverseRandomUnit"></span>
-					<button type="button" data-ng-click="checkAnswer()">Submit</button>
-					<button type="button" data-ng-click="reset(temperature)">Reset</button>
+					<button type="button" data-ng-click="checkAnswer()" class="btn btn-primary">Submit</button>
+					<button type="button" data-ng-click="reset()" class="btn btn-danger">Reset</button>
 					<div data-ng-bind="temperature.result"></div>
 					<div data-ng-bind-html="temperature.alert"></div>
 				</div>

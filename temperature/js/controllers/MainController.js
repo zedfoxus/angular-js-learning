@@ -89,7 +89,7 @@ app.controller('MainController', ['$scope', '$sce', function($scope, $sce) {
 			+ simpleAnswer.toFixed(2) + ' ' + $scope.temperature.inverseRandomUnit
 		);
 	};
-	$scope.reset = function(temperature) {
+	$scope.reset = function() {
 		setDefaults();
 		$scope.temperatureForm.$setPristine();
 		$scope.temperature = defaultForm;
