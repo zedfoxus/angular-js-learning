@@ -58,7 +58,6 @@ function getInverseRandomUnit() {
 setDefaults();
 
 app.controller('MainController', ['$scope', '$sce', function($scope, $sce) {
-	console.log ('in controller');
 	$scope.temperature = defaultForm;
 
 	$scope.checkAnswer = function() {
@@ -88,11 +87,17 @@ app.controller('MainController', ['$scope', '$sce', function($scope, $sce) {
 			+ 'Simple answer is '
 			+ simpleAnswer.toFixed(2) + ' ' + $scope.temperature.inverseRandomUnit
 		);
+
 	};
+
+	document.getElementById('answer').focus();
+
 	$scope.reset = function() {
 		setDefaults();
 		$scope.temperatureForm.$setPristine();
 		$scope.temperature = defaultForm;
+		document.getElementById('answer').focus();
 	}
+
 }]);
 
