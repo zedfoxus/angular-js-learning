@@ -21,11 +21,13 @@
 
 					<h2 class="row">is</h2>
 
-					<form class="form-inline" onsubmit="return false;">
-					<div class="form-group">
-						<input type="text" id="answer" class="form-control text-center" placeholder="{{ temperature.inverseRandomUnit }}" data-ng-model="temperature.answer">
+					<div class="row text-center">
+						<div class="col-xs-4"></div>
+						<div class="col-xs-4">
+							<input type="text" id="answer" class="form-control text-center" placeholder="{{ temperature.inverseRandomUnit }}" data-ng-model="temperature.answer">
+						</div>
+						<div class="col-xs-4"></div>
 					</div>
-					</form>
 
 					<div class="row" style="margin: 5px 0">
 						<button type="button" data-ng-click="checkAnswer()" class="btn btn-primary">Submit</button>
