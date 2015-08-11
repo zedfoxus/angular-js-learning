@@ -9,10 +9,32 @@
 </head>
 <body>
 
+<!--
 	<div data-ng-app="" data-ng-init="name='hello'">
-		<p>Name: <input type="text" data-ng-model="name"></p>
+		<p><label>
+			Name:
+			<input type="text" data-ng-model="name">
+		</label></p>
 		<p data-ng-bind="name"></p>
+		<p>{{ name }}</p>
+	</div>-->
+
+	<div data-ng-app="myApp" data-ng-controller="myCtrl">
+		<p><label>
+			Name:
+			<input type="text" data-ng-model="name">
+		</label></p>
+		<p data-ng-bind="name"></p>
+		<p>{{ age }}</p>
 	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+			$scope.name = 'test';
+			$scope.age = 44;
+		});
+	</script>
 
 </body>
 </html>
