@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+Use two angular modules
+-->
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
@@ -9,7 +12,6 @@
 </head>
 <body>
 
-<!--
 	<div data-ng-app="" data-ng-init="name='hello'">
 		<p><label>
 			Name:
@@ -17,9 +19,9 @@
 		</label></p>
 		<p data-ng-bind="name"></p>
 		<p>{{ name }}</p>
-	</div>-->
+	</div>
 
-	<div data-ng-app="myApp" data-ng-controller="myCtrl">
+	<div id="myApp" data-ng-app="myApp" data-ng-controller="myCtrl">
 		<p><label>
 			Name:
 			<input type="text" data-ng-model="name">
@@ -34,6 +36,7 @@
 			$scope.name = 'test';
 			$scope.age = 44;
 		});
+		angular.bootstrap(document.getElementById('myApp'), ['myApp']);
 	</script>
 
 </body>
