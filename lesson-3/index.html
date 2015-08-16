@@ -8,21 +8,21 @@
     <!-- Include the AngularJS library -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
   </head>
-  <body ng-app="ForecastApp">
+  <body data-ng-app="ForecastApp">
 
-    <div class="main" ng-controller="MainController">
+    <div class="main" data-ng-controller="MainController">
       <div class="container">
         <div class="row">
           <div class="col-sm-5 col-sm-offset-7">
             <h1>{{ fiveDay.city_name }}</h1>
             <h2>5-day forecast</h2>
-            <div class="forecast" ng-repeat="day in fiveDay.days">
+            <div class="forecast" data-ng-repeat="day in fiveDay.days">
               <div class="day row">
                 <div class="weekday col-md-4">
                   <p>{{ day.datetime | date }}</p>
                 </div>
                 <div class="weather col-md-3">
-                  <img ng-src="{{ day.icon }}">
+                  <img data-ng-src="{{ day.icon }}">
                 </div>
                 <div class="weather col-md-1">
                 </div>

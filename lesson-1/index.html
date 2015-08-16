@@ -7,28 +7,28 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
   </head>
-  <body ng-app="myApp">
+  <body data-ng-app="myApp">
     <div class="header">
       <div class="container">
         <h1>Book End</h1>
       </div>
     </div>
 
-    <div class="main" ng-controller="MainController">
+    <div class="main" data-ng-controller="MainController">
       <div class="container">
 
         <h1>{{ title }}</h1>
         <h2>{{ promo }}</h2>
 
-        <div ng-repeat="product in products" class="col-md-6">
+        <div data-ng-repeat="product in products" class="col-md-6">
           <div class="thumbnail">
-            <img ng-src="{{ product.cover }}">
+            <img data-ng-src="{{ product.cover }}">
             <p class="title"> {{ product.name | uppercase }} </p>
             <p class="price"> {{ product.price | currency }} </p>
             <p class="date"> {{ product.pubdate | date }} </p>
             <div class="rating">
-              <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
-              <p class="dislikes" ng-click="minusOne($index)">- {{ product.dislikes }} </p>
+              <p class="likes" data-ng-click="plusOne($index)">+ {{ product.likes }} </p>
+              <p class="dislikes" data-ng-click="minusOne($index)">- {{ product.dislikes }} </p>
             </div>
           </div>
         </div>
