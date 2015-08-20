@@ -15,7 +15,7 @@
 		<div class="row">
 			<label for="user">User:</label>
 			<input type="text" name="user" id="user" data-ng-model="user" required>
-			<span data-ng-show="myform.user.$dirty && myform.user.$invalid">
+			<span style="color:red" data-ng-show="myform.user.$dirty && myform.user.$invalid">
 				<span data-ng-show="myform.user.$error.required">Username is required</span>
 			</span>
 		</div>
