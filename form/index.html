@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Form example</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+</head>
+<body>
+
+<div class="container" data-ng-app="myApp" data-ng-controller="myCtrl">
+
+	<h3>Users</h3>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Edit</th>
+				<th>First name</th>
+				<th>Last name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="user in users">
+				<td>
+					<button class="btn" data-ng-click="editUser(user.id)">
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+					</button>
+				</td>
+				<td>{{ user.fname }}</td>
+				<td>{{ user.lname }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr>
+	<button class="btn btn-success" data-ng-click="editUser('new')">
+		<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Create
+	</button>
+	<hr>
+
+	<h1 data-ng-show="edit">Create User</h1>
+	<h1 data-ng-hide="edit">Edit User</h1>
+
+	<form class="form-horizontal">
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">First name</label>
+			<div class="col-sm-10">
+				<input type="text" data-ng-model="fname" data-ng-disabled="!edit" placeholder="First name">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Last name</label>
+			<div class="col-sm-10">
+				<input type="text" data-ng-model="lname" data-ng-disabled="!edit" placeholder="Last name">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Password</label>
+			<div class="col-sm-10">
+				<input type="password" data-ng-model="passw1" data-ng-disabled="!edit" placeholder="Password">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Repeat password</label>
+			<div class="col-sm-10">
+				<input type="password" data-ng-model="passw2" data-ng-disabled="!edit" placeholder="Repeat password">
+			</div>
+		</div>
+
+	</form>
+
+	<hr>
+	<button class="btn btn-success" data-ng-disabled="error || incomplete">
+		<span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save
+	</button>
+
+</div>
+
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope) {
+
+		// default data
+		$scope.fname = '';
+		$scope.lname = '';
+		$scope.passw1 = '';
+		$scope.passw2 = '';
+		$scope.users = [
+			{ id:1, fname:'Hege', lname:"Pege" },
+			{ id:2, fname:'Kim',  lname:"Pim" },
+			{ id:3, fname:'Sal',  lname:"Smith" },
+			{ id:4, fname:'Jack', lname:"Jones" },
+			{ id:5, fname:'John', lname:"Doe" },
+			{ id:6, fname:'Peter',lname:"Pan" }
+		];
+
+		// flags
+		$scope.edit = true;
+		$scope.error = false;
+		$scope.incomplete = true;
+
+		// user editing function
+		$scope.editUser = function(id) {
+			if (id != 'new') {
+				$scope.edit = false;
+				$scope.fname = $scope.users[id - 1].fname;
+				$scope.lname = $scope.users[id - 1].lname;
+			} else {
+				$scope.edit = true;
+				$scope.error = false;
+				$scope.incomplete = true;
+				$scope.fname = '';
+				$scope.lname = '';
+			}
+		};
+
+		// watching
+		$scope.$watch('fname', function() { $scope.validate(); });
+		$scope.$watch('lname', function() { $scope.validate(); });
+		$scope.$watch('passw1', function() { $scope.validate(); });
+		$scope.$watch('passw2', function() { $scope.validate(); });
+
+		// validation
+		$scope.validate = function() {
+			$scope.error = $scope.passw1 !== $scope.passw2;
+			$scope.incomplete = $scope.edit && (
+					!$scope.fname.length || !$scope.lname.length ||
+					!$scope.passw1.length || !$scope.passw2.length);
+			return null;
+		};
+
+	});
+</script>
+
+</body>
+</html>
