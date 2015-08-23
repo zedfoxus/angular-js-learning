@@ -13,7 +13,7 @@
 	<h1>Learning links</h1>
 	<div data-ng-controller="myCtrl">
 		<div data-ng-repeat="x in links">
-			<a href="{{ x.address }}">{{ x.link }}</a>
+			<a data-ng-href="{{ x.address }}">{{ x.link }}</a>
 		</div>
 	</div>
 </div>
@@ -37,6 +37,7 @@
 			{'link': 'Two Angular controllers', 'address': 'two-angular-controllers/'},
 			{'link': 'Validations', 'address': 'validations/'},
 			{'link': 'Form', 'address': 'form/'},
+			{'link': 'Directives', 'address': 'directives/'}
 		];
 	});
 </script>
