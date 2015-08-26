@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Service</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+</head>
+<body>
+
+<div id="myApp" data-ng-app="myApp" data-ng-controller="myCtrl">
+	Enter a number: <input type="text" data-ng-model="number">
+	<button data-ng-click="square()">Square</button>
+	<button data-ng-click="cube()">Cube</button>
+	<p>Answer: {{ answer }}</p>
+</div>
+
+<script>
+	var app = angular.module('myApp', []);
+
+	app.service('MathService', function() {
+		this.add = function(a, b) { return a+b; };
+		this.multiply = function(a, b) { return a*b; };
+	});
+
+	app.service('CalculatorService', function(MathService) {
+		this.square = function(a) { return MathService.multiply(a, a); };
+		this.cube = function(a) { return MathService.multiply(a, MathService.multiply(a, a)); };
+	});
+
+	app.controller('myCtrl', function($scope, CalculatorService) {
+		$scope.square = function() {
+			$scope.answer = CalculatorService.square($scope.number);
+		};
+
+		$scope.cube = function() {
+			$scope.answer = CalculatorService.cube($scope.number);
+		}
+	});
+
+</script>
+
+</body>
+</html>
