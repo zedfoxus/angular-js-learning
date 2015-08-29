@@ -11,9 +11,20 @@
 
 <div id="myApp" data-ng-app="myApp">
 	<div data-ng-controller="myCtrl">
-		<p data-ng-repeat="nm in name">
-			<span data-ng-if="nm[0] == 'B'">{{ nm }}</span>
-		</p>
+		<div>There are {{ nm.length }} names</div>
+		<ul data-ng-repeat="nm in name">
+			<li>{{ nm }}</li>
+		</ul>
+
+		<div>Only the one starting with B is shown</div>
+		<ul data-ng-repeat="nm in name">
+			<li data-ng-if="nm[0] == 'B'">{{ nm }}</li>
+		</ul>
+
+		<p><input type="text" placeholder="Type name" data-ng-model="selectname"><p>
+		<ul data-ng-repeat="nm in name | filter: selectname">
+			<li>{{ nm }}</li>
+		</ul>
 	</div>
 </div>
 
