@@ -15,9 +15,11 @@
   <button data-ng-click="$emit('MyEvent')">Emit</button> 
   <button data-ng-click="$broadcast('MyEvent')">Broadcast</button>
 
+  <!-- Notice that the controller is added to this div as well -->
   <div data-ng-controller="myCtrl">
     Middle scope/MyEvent counter = {{ count }}
 
+    <!-- Notice that the controller is added to this div as well -->
     <div data-ng-controller="myCtrl">
       Leaf scope/MyEvent counter = {{ count }}
     </div>
