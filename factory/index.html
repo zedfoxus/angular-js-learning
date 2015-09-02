@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Factory</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+</head>
+<body>
+
+	<div data-ng-app='myApp' data-ng-controller='myCtrl'>
+		<input type="text" ng-model="message">
+		<button data-ng-click="showMessages(message)">Remember</button>
+	</div>
+
+	<div>Type number. Press button. Do that 3 times to show the numbers you typed</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+
+		app.controller('myCtrl', function($scope, notify) {
+			$scope.showMessages = function(message) {
+				notify(message);
+			};
+		});
+
+		app.factory('notify', function($window) {
+			var messages = [];
+
+			function resetMessages(){
+				messages = [];
+			}
+
+			return function(message) {
+				messages.push(message);
+				if (messages.length == 3) {
+					$window.alert(messages.join("\n"));
+					resetMessages();
+				}
+			}
+
+		});
+
+	</script>
+
+</body>
+</html>
