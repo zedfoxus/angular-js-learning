@@ -12,17 +12,40 @@
 	<div data-ng-app='myApp' data-ng-controller='myCtrl'>
 		<input type="text" ng-model="message">
 		<button data-ng-click="showMessages(message)">Remember</button>
+		
+		<p data-ng-repeat="message in messages track by $index">
+			Accepted {{ message }}
+		</p>
+
 	</div>
 
 	<div>Type number. Press button. Do that 3 times to show the numbers you typed</div>
 
+
 	<script>
 		var app = angular.module('myApp', []);
 
-		app.controller('myCtrl', function($scope, notify) {
+		app.controller('myCtrl', function($scope, notify2) {
 			$scope.showMessages = function(message) {
-				notify(message);
+				$scope.messages = notify2(message);
 			};
+		});
+
+		app.factory('notify2', function($window) {
+			var messages = [];
+
+			function resetMessages() {
+				messages = [];
+			}
+
+			return function(message) {
+				messages.push(message);
+				if (messages.length == 3) {
+					$window.alert(messages.join("\n"));
+					resetMessages();
+				}
+				return messages;
+			}
 		});
 
 		app.factory('notify', function($window) {
