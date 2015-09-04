@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Scope Event Propagation</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+</head>
+<body>  
+
+<div data-ng-app="myApp" data-ng-controller="myCtrl">
+  Root scope/MyEvent counter = {{ count }}
+  <br>
+  <button data-ng-click="$emit('MyEvent')">Emit</button> 
+  <button data-ng-click="$broadcast('MyEvent')">Broadcast</button>
+
+  <!-- Notice that the controller is added to this div as well -->
+  <div data-ng-controller="myCtrl">
+    Middle scope/MyEvent counter = {{ count }}
+
+    <!-- Notice that the controller is added to this div as well -->
+    <div data-ng-controller="myCtrl">
+      Leaf scope/MyEvent counter = {{ count }}
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    $scope.count = 0;
+    $scope.$on('MyEvent', function() {
+      $scope.count++;
+    }); 
+  });
+</script>
+
+</body>
+</html>
