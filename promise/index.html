@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/ui-bootstrap-tpls-0.13.1.min.js"></script>
+</head>
+<body>
+
+	<div data-ng-app='myApp' data-ng-controller='myCtrl'>
+		<div><button data-ng-click="responsedata()">Get customer info</button></div>
+		<div>{{ printinfo }}</div>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+
+		app.controller('myCtrl', function($scope, SonService) {
+			$scope.printinfo = 'No data yet';
+			$scope.responsedata = function() {
+				SonService.getWeather()
+					.then(function(data) {
+						$scope.printinfo = data;
+					}, function(data) {
+						$scope.printinfo = 'bad data';
+					});
+			};
+		});
+
+		// service
+		app.factory('SonService', function($http, $q){
+			return {
+				getWeather: function() {
+					return $http.get('http://www.w3schools.com/angular/customers.php')
+						.then(function(response) {
+							if (typeof response.data == 'object'){
+								return response.data;
+							} else {
+								return $q.reject(response.data);
+							}
+						}, function(response) {
+							return $q.reject(response.data);
+						});
+				}
+			};
+		});
+	</script>
+
+</body>
+</html>
